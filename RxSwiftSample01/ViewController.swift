@@ -28,8 +28,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let nameObservable: Observable<String?> = nameTextField.rx.text.asObservable()
+        let customGreetingObservable: Observable<String?> = greetingsTextField.rx.text.asObservable()
 
-        nameObservable.bind(to: greetingLabel.rx.text).disposed(by: disposeBag)
+        let greetingWithNameObservable: Observable<String> = Observable.combineLatest(nameObservable, customGreetingObservable) { (string1: String?, string2: String?) in
+            return string1! + "," + string2!
+        }
+
+        greetingWithNameObservable.bind(to: greetingLabel.rx.text).disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {
