@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var stateSegmentedControl: UISegmentedControl!
     @IBOutlet weak var greetingsTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
+    
+    let lastSelectedGreeting: Variable<String> = Variable("Hi")
 
     @IBOutlet var greetingButtons: [UIButton]!
 
@@ -31,12 +33,6 @@ class ViewController: UIViewController {
 
         let nameObservable: Observable<String?> = nameTextField.rx.text.asObservable()
         let customGreetingObservable: Observable<String?> = greetingsTextField.rx.text.asObservable()
-
-        let greetingWithNameObservable: Observable<String> = Observable.combineLatest(nameObservable, customGreetingObservable) { (string1: String?, string2: String?) in
-            return string1! + "," + string2!
-        }
-
-        greetingWithNameObservable.bind(to: greetingLabel.rx.text).disposed(by: disposeBag)
 
         let segmentedControlObservable: Observable<Int> = stateSegmentedControl.rx.value.asObservable()
         let stateObservable: Observable<State> = segmentedControlObservable.map { (selectedIndex: Int) -> State in
@@ -54,7 +50,21 @@ class ViewController: UIViewController {
 
         greetingButtons.forEach { button in
             greetingButtonsEnabledObservable.bind(to: button.rx.isEnabled).disposed(by: disposeBag)
+            button.rx.tap.subscribe(onNext: { _ in
+                self.lastSelectedGreeting.value = button.currentTitle!
+            }).disposed(by: disposeBag)
         }
+
+        let predefinedGreetingObservable: Observable<String> = lastSelectedGreeting.asObservable()
+
+        let finalGreetingObservable: Observable<String> = Observable.combineLatest(stateObservable, customGreetingObservable, predefinedGreetingObservable, nameObservable) { (state: State, customGreeting: String?, predefinedGreeting: String, name: String?) -> String in
+            switch state {
+            case .useTextField: return customGreeting! + ", " + name!
+            case .useButtons: return predefinedGreeting + ", " + name!
+            }
+        }
+
+        finalGreetingObservable.bind(to: greetingLabel.rx.text).disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

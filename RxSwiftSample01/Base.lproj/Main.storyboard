@@ -33,8 +33,8 @@
                                     <constraint firstAttribute="height" constant="27" id="VbN-uE-dvf"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Use Buttons"/>
+                                    <segment title="Use TextField"/>
                                 </segments>
                             </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Greeting" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hGm-Zh-Aau">
@@ -47,7 +47,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="282-mz-oud">
-                                <rect key="frame" x="144" y="186" width="88" height="30"/>
+                                <rect key="frame" x="122" y="186" width="88" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="88" id="m89-fw-3dN"/>
                                 </constraints>
@@ -70,9 +70,9 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="go4-Ri-g4n">
-                                <rect key="frame" x="304" y="186" width="55" height="30"/>
+                                <rect key="frame" x="218" y="186" width="81" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="G4m-8R-I8v"/>
+                                    <constraint firstAttribute="width" constant="81" id="eL9-cf-KW9"/>
                                 </constraints>
                                 <state key="normal" title="See you"/>
                             </button>
@@ -91,11 +91,11 @@
                             <constraint firstItem="WNl-Ck-bRa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="PcK-0X-vjm"/>
                             <constraint firstItem="hny-a8-BsQ" firstAttribute="centerY" secondItem="282-mz-oud" secondAttribute="centerY" id="RBt-Pq-pVy"/>
                             <constraint firstItem="CLk-yj-2Wx" firstAttribute="top" secondItem="282-mz-oud" secondAttribute="bottom" constant="30" id="VG8-iA-n3b"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="go4-Ri-g4n" secondAttribute="trailing" constant="16" id="W2U-xw-vZ0"/>
                             <constraint firstItem="NJj-gL-8BR" firstAttribute="top" secondItem="WNl-Ck-bRa" secondAttribute="bottom" constant="17" id="XsM-Iy-qMr"/>
                             <constraint firstItem="hGm-Zh-Aau" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="YGK-H2-qcy"/>
-                            <constraint firstItem="282-mz-oud" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="a2z-RW-GJM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NJj-gL-8BR" secondAttribute="trailing" constant="16" id="l73-d4-lAW"/>
+                            <constraint firstItem="go4-Ri-g4n" firstAttribute="leading" secondItem="282-mz-oud" secondAttribute="trailing" constant="8" id="x2b-vb-biW"/>
+                            <constraint firstItem="282-mz-oud" firstAttribute="leading" secondItem="hny-a8-BsQ" secondAttribute="trailing" constant="8" id="y5o-Ph-B8z"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WNl-Ck-bRa" secondAttribute="trailing" constant="16" id="zdm-6S-aXo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -105,6 +105,9 @@
                         <outlet property="greetingsTextField" destination="hGm-Zh-Aau" id="mCB-d5-nFe"/>
                         <outlet property="nameTextField" destination="CLk-yj-2Wx" id="V47-SB-EmH"/>
                         <outlet property="stateSegmentedControl" destination="NJj-gL-8BR" id="lqt-Kv-Dnc"/>
+                        <outletCollection property="greetingButtons" destination="hny-a8-BsQ" collectionClass="NSMutableArray" id="BSf-qH-RS9"/>
+                        <outletCollection property="greetingButtons" destination="282-mz-oud" collectionClass="NSMutableArray" id="YR9-MV-uR7"/>
+                        <outletCollection property="greetingButtons" destination="go4-Ri-g4n" collectionClass="NSMutableArray" id="aPM-Za-ti9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
