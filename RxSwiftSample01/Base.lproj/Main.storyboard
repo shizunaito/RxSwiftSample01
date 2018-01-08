@@ -101,13 +101,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="greetingButtons" destination="go4-Ri-g4n" id="SOP-PC-xTe"/>
                         <outlet property="greetingLabel" destination="WNl-Ck-bRa" id="gFu-KG-O52"/>
                         <outlet property="greetingsTextField" destination="hGm-Zh-Aau" id="mCB-d5-nFe"/>
                         <outlet property="nameTextField" destination="CLk-yj-2Wx" id="V47-SB-EmH"/>
                         <outlet property="stateSegmentedControl" destination="NJj-gL-8BR" id="lqt-Kv-Dnc"/>
-                        <outletCollection property="greetingButtons" destination="282-mz-oud" collectionClass="NSMutableArray" id="esM-T4-Uy7"/>
-                        <outletCollection property="greetingButtons" destination="hny-a8-BsQ" collectionClass="NSMutableArray" id="BRC-7X-FqA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

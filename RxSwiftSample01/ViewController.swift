@@ -22,10 +22,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var greetingsTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
 
-    @IBOutlet var greetingButtons: [UIButton]!
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let nameObservable: Observable<String?> = nameTextField.rx.text.asObservable()
+
+        nameObservable.subscribe({ (event: Event<String?>) in
+            switch event {
+            case .completed: print("completed")
+            case .error(_): print("error")
+            case .next(let string): print(string)
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {
