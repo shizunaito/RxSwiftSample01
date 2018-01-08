@@ -24,6 +24,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var greetingsTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
 
+    @IBOutlet var greetingButtons: [UIButton]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +37,24 @@ class ViewController: UIViewController {
         }
 
         greetingWithNameObservable.bind(to: greetingLabel.rx.text).disposed(by: disposeBag)
+
+        let segmentedControlObservable: Observable<Int> = stateSegmentedControl.rx.value.asObservable()
+        let stateObservable: Observable<State> = segmentedControlObservable.map { (selectedIndex: Int) -> State in
+            return State(rawValue: selectedIndex)!
+        }
+        let greetingTextFieldEnabledObservable: Observable<Bool> = stateObservable.map { (state: State) -> Bool in
+            return state == .useTextField
+        }
+
+        greetingTextFieldEnabledObservable.bind(to: greetingsTextField.rx.isEnabled).disposed(by: disposeBag)
+
+        let greetingButtonsEnabledObservable: Observable<Bool> = greetingTextFieldEnabledObservable.map { (greetingEnabled: Bool) -> Bool in
+            return !greetingEnabled
+        }
+
+        greetingButtons.forEach { button in
+            greetingButtonsEnabledObservable.bind(to: button.rx.isEnabled).disposed(by: disposeBag)
+        }
     }
 
     override func didReceiveMemoryWarning() {
