@@ -12,6 +12,8 @@ import RxCocoa
 
 class ViewController: UIViewController {
 
+    let disposeBag = DisposeBag()
+
     enum State: Int {
         case useButtons
         case useTextField
@@ -27,13 +29,7 @@ class ViewController: UIViewController {
 
         let nameObservable: Observable<String?> = nameTextField.rx.text.asObservable()
 
-        nameObservable.subscribe({ (event: Event<String?>) in
-            switch event {
-            case .completed: print("completed")
-            case .error(_): print("error")
-            case .next(let string): print(string)
-            }
-        })
+        nameObservable.bind(to: greetingLabel.rx.text).disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {
